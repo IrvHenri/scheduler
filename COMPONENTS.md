@@ -32,64 +32,64 @@
 
 - State:
 - Props: name-string, spots-INT, selected-boolean, setDate-function,selected-boolean
-- Used by:
+- Used by: DayList
 
 ### InterviewerList
 
 - State:
-- Props:
+- Props: interviewers:array , interviewer:number , setInterviewer:function
 - Used by:
 
 ### InterviewerListItem
 
 - State:
-- Props:
-- Used by:
+- Props: id:number, name:string , avatar:url , selected:boolean , setInterviewer:function
+- Used by: InterviewerList
 
 ### Appointment
 
 - State:
-- Props:
+- Props: time:string , interview: Object
 - Used by:
 
 ### Appointment/Header
 
 - State:
-- Props:
-- Used by:
+- Props: time:String
+- Used by: Appointment
 
 ### Appointment/Empty
 
 - State:
-- Props:
-- Used by:
+- Props: onAdd:Function
+- Used by: Appointment
 
 ### Appointment/Show
 
 - State:
-- Props:
-- Used by:
+- Props: student:String , interviewer:Object, onEdit:Function , onDelete:Function
+- Used by: Appointment
 
 ### Appointment/Form
 
-- State:
-- Props:
+- State: name:String, interviewer:Number
+- Props: name:String, interviewers:Array , interviewer:Number , onSave:Function, onCancel:Function
 - Used by:
 
 ### Appointment/Status
 
 - State:
-- Props:
+- Props: message:String
 - Used by:
 
 ### Appointment/Error
 
 - State:
-- Props:
+- Props: message:String , onClose:Function
 - Used by:
 
 ### Appointment/Confirm
 
 - State:
-- Props:
+- Props: message:String, onConfirm:Function, onCancel:Function
 - Used by:
