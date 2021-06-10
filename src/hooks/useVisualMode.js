@@ -6,9 +6,12 @@ export default function useVisualMode(initial) {
 
   const transition = (newMode, replace = false) => {
     if (replace) {
-      history.pop();
       setMode(newMode);
-      setHistory((prevHistory) => [...prevHistory, newMode]);
+      setHistory((prevHistory) => {
+        let newArr = [...prevHistory];
+        newArr.pop();
+        return [...newArr, newMode];
+      });
     } else {
       setMode(newMode);
       setHistory((prevHistory) => [...prevHistory, newMode]);
@@ -16,12 +19,14 @@ export default function useVisualMode(initial) {
   };
 
   const back = () => {
-    if (history.length === 1) {
-      return;
-    }
     if (history.length > 1) {
-      history.pop();
-      setMode(history[history.length - 1]);
+      // history.pop();
+      setHistory((prevHistory) => {
+        let newArr = [...prevHistory];
+        newArr.pop();
+        setMode(newArr[newArr.length - 1]);
+        return newArr;
+      });
     }
   };
   return { mode, transition, back };
