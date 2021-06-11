@@ -36,6 +36,7 @@ export default function Application(props) {
   //Helpers
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewsForDay(state, state.day);
+
   const bookInterview = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
@@ -47,10 +48,14 @@ export default function Application(props) {
       [id]: appointment,
     };
 
-    setState({
-      ...state,
-      appointments,
-    });
+    return axios
+      .put(`/api/appointments/${id}`, appointment)
+      .then((response) => {
+        setState({
+          ...state,
+          appointments,
+        });
+      });
   };
   // Render Schedule
   const schedule = dailyAppointments.map((appointment) => {
