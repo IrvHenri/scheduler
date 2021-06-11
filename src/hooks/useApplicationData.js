@@ -23,6 +23,25 @@ const useApplicationData = () => {
       }));
     });
   }, []);
+  const updateSpots = (state, id, increment) => {
+    const newDays = state.days.map((day) => {
+      const appointmentID = state.appointments[id].id;
+      // If interview is truthy and being updated, prevent spots from decreasing after saving.
+      const isInterviewActive = state.appointments[appointmentID].interview;
+      if (day.appointments.includes(appointmentID)) {
+        return {
+          ...day,
+          spots: increment
+            ? isInterviewActive
+              ? day.spots
+              : day.spots - 1
+            : day.spots + 1,
+        };
+      }
+      return day;
+    });
+    return newDays;
+  };
 
   const bookInterview = (id, interview) => {
     const appointment = {
@@ -38,9 +57,11 @@ const useApplicationData = () => {
     return axios
       .put(`/api/appointments/${id}`, appointment)
       .then((response) => {
+        let newDays = updateSpots(state, id, !!interview);
         setState({
           ...state,
           appointments,
+          days: newDays,
         });
       });
   };
@@ -56,9 +77,11 @@ const useApplicationData = () => {
     };
 
     return axios.delete(`/api/appointments/${id}`).then(() => {
+      let newDays = updateSpots(state, id, false);
       setState({
         ...state,
         appointments,
+        days: newDays,
       });
     });
   };
