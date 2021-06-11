@@ -7,6 +7,7 @@ import Empty from "./Empty";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
+import Error from "./Error";
 export default function Appointment(props) {
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
@@ -15,6 +16,8 @@ export default function Appointment(props) {
   const CONFIRM = "CONFIRM";
   const DELETING = "DELETING";
   const EDIT = "EDIT";
+  const ERROR_SAVE = "ERROR_SAVE";
+  const ERROR_DELETE = "ERROR_DELETE";
   const { id, time, interviewers, bookInterview, cancelInterview } = props;
 
   const { mode, transition, back } = useVisualMode(
@@ -26,16 +29,16 @@ export default function Appointment(props) {
       interviewer,
     };
     transition(SAVING);
-    bookInterview(id, interview).then(() => transition(SHOW));
+    bookInterview(id, interview)
+      .then(() => transition(SHOW))
+      .catch(() => transition(ERROR_SAVE, true));
   };
 
-  const deleteInterview = (name, interviewer) => {
-    const interview = {
-      student: name,
-      interviewer,
-    };
-    transition(DELETING);
-    cancelInterview(id, interview).then(() => transition(EMPTY));
+  const destroy = (name, interviewer) => {
+    transition(DELETING, true);
+    cancelInterview(id)
+      .then(() => transition(EMPTY))
+      .catch(() => transition(ERROR_DELETE, true));
   };
 
   return (
@@ -57,7 +60,7 @@ export default function Appointment(props) {
       {mode === CONFIRM && (
         <Confirm
           message="Are you sure you would like to delete?"
-          onConfirm={() => deleteInterview()}
+          onConfirm={() => destroy()}
           onCancel={back}
         />
       )}
@@ -70,6 +73,12 @@ export default function Appointment(props) {
           onSave={save}
           onCancel={back}
         />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error message="Failed to delete!" onClose={() => back()} />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error message="Failed to save!" onClose={() => back()} />
       )}
     </article>
   );
