@@ -32,13 +32,33 @@ export default function Application(props) {
       }));
     });
   }, []);
+
+  //Helpers
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewsForDay(state, state.day);
+  const bookInterview = (id, interview) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    setState({
+      ...state,
+      appointments,
+    });
+  };
+  // Render Schedule
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
     return (
       <Appointment
         key={appointment.id}
+        bookInterview={bookInterview}
         {...appointment}
         interview={interview}
         interviewers={dailyInterviewers}

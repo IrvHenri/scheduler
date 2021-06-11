@@ -5,8 +5,11 @@ import Button from "../Button";
 export default function Form(props) {
   const { interviewers, onSave, onCancel } = props;
   const [name, setName] = useState(props.name || "");
-  const [interviewer, setInterviewer] = useState(props.interviewer || null);
-
+  //Bug with  saving with no interviewer set
+  const defaultInterviewer = interviewers[0].id;
+  const [interviewer, setInterviewer] = useState(
+    props.interviewer || defaultInterviewer
+  );
   const reset = () => {
     setName("");
     setInterviewer(null);
@@ -40,7 +43,7 @@ export default function Form(props) {
           <Button danger onClick={() => cancel()}>
             Cancel
           </Button>
-          <Button confirm onClick={onSave}>
+          <Button confirm onClick={() => onSave(name, interviewer)}>
             Save
           </Button>
         </section>
