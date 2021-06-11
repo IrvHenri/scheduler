@@ -28,10 +28,14 @@ export default function Appointment(props) {
       student: name,
       interviewer,
     };
-    transition(SAVING);
-    bookInterview(id, interview)
-      .then(() => transition(SHOW))
-      .catch(() => transition(ERROR_SAVE, true));
+    if (name && interviewer) {
+      transition(SAVING);
+      bookInterview(id, interview)
+        .then(() => transition(SHOW))
+        .catch(() => transition(ERROR_SAVE, true));
+    } else {
+      return;
+    }
   };
 
   const destroy = (name, interviewer) => {
