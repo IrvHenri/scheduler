@@ -110,9 +110,7 @@ const useApplicationData = () => {
     socket.onopen = () => {
       socket.send("ping");
       socket.onmessage = function (event) {
-        console.log("Message Recieved:", JSON.parse(event.data));
         const data = JSON.parse(event.data);
-
         const { type, id, interview } = data;
         if (data.type === "SET_INTERVIEW") {
           dispatch({ type: type, id: id, interview: interview });

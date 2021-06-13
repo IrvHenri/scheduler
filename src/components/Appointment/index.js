@@ -35,6 +35,7 @@ export default function Appointment(props) {
         .then(() => transition(SHOW))
         .catch(() => transition(ERROR_SAVE, true));
     } else {
+      /// Transition to Status? With relevant message
       return;
     }
   };
