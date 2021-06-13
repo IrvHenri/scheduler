@@ -46,6 +46,7 @@ export default function Appointment(props) {
       .catch(() => transition(ERROR_DELETE, true));
   };
 
+  // regression test required
   useEffect(() => {
     if (mode === EMPTY && interview) {
       transition(SHOW);
