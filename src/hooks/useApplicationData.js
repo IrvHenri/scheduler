@@ -47,7 +47,6 @@ const useApplicationData = () => {
     appointments: {},
     interviewers: {},
   });
-  const setDay = (day) => dispatch({ type: SET_DAY, day });
 
   useEffect(() => {
     Promise.all([
@@ -63,6 +62,9 @@ const useApplicationData = () => {
       });
     });
   }, []);
+
+  const setDay = (day) => dispatch({ type: SET_DAY, day });
+
   function updateSpots(state, id, increment) {
     const newDays = state.days.map((day) => {
       const appointmentID = state.appointments[id].id;
@@ -101,6 +103,25 @@ const useApplicationData = () => {
       });
     });
   };
+
+  //Web Socket connection
+  useEffect(() => {
+    const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+    socket.onopen = () => {
+      socket.send("ping");
+      socket.onmessage = function (event) {
+        console.log("Message Recieved:", JSON.parse(event.data));
+        const data = JSON.parse(event.data);
+
+        const { type, id, interview } = data;
+        if (data.type === "SET_INTERVIEW") {
+          dispatch({ type: type, id: id, interview: interview });
+        }
+      };
+    };
+
+    socket.onclose = () => console.log("socket closed");
+  }, []);
 
   return { state, setDay, bookInterview, cancelInterview };
 };
