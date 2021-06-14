@@ -30,15 +30,10 @@ export default function Appointment(props) {
       student: name,
       interviewer,
     };
-    if (name && interviewer) {
-      transition(SAVING);
-      bookInterview(id, interview)
-        .then(() => transition(SHOW))
-        .catch(() => transition(ERROR_SAVE, true));
-    } else {
-      /// Transition to Status? With relevant message
-      return;
-    }
+    transition(SAVING);
+    bookInterview(id, interview)
+      .then(() => transition(SHOW))
+      .catch(() => transition(ERROR_SAVE, true));
   };
 
   const destroy = (name, interviewer) => {
