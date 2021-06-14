@@ -27,8 +27,8 @@ const useApplicationData = () => {
           ...state.appointments,
           [id]: appointment,
         };
-
-        let newDays = updateSpots(state, id, !!interview);
+        ///FIX BUG
+        let newDays = updateSpots(state, id, interview);
         return {
           ...state,
           appointments: appointments,
