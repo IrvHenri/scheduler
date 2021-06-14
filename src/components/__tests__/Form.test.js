@@ -15,14 +15,14 @@ describe("Form", () => {
     },
   ];
 
-  xit("renders without student name if not provided", () => {
+  it("renders without student name if not provided", () => {
     const { getByPlaceholderText } = render(
       <Form interviewers={interviewers} />
     );
     expect(getByPlaceholderText("Enter Student Name")).toHaveValue("");
   });
 
-  xit("renders with initial student name", () => {
+  it("renders with initial student name", () => {
     const { getByTestId } = render(
       <Form interviewers={interviewers} name="Lydia Miller-Jones" />
     );
@@ -51,14 +51,14 @@ describe("Form", () => {
         interviewers={interviewers}
         onSave={onSave}
         name="Lydia Miller-Jones"
+        interviewer={1}
       />
     );
 
     /* 3. Click the save button */
     fireEvent.click(getByText("Save"));
-
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
     expect(onSave).toHaveBeenCalledTimes(1);
-    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
+    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", 1);
   });
 });
