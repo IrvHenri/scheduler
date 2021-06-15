@@ -27,8 +27,7 @@ const useApplicationData = () => {
           ...state.appointments,
           [id]: appointment,
         };
-        ///FIX BUG
-        let newDays = updateSpots(state, id, interview);
+        let newDays = updateSpots(state, id, interview); // !!interview
         return {
           ...state,
           appointments: appointments,
@@ -54,6 +53,10 @@ const useApplicationData = () => {
       axios.get("/api/appointments"),
       axios.get("/api/interviewers"),
     ]).then((all) => {
+      console.log(
+        "UseEffect - SET_APPLICATION_DATA : Monday spots",
+        all[0].data[0].spots
+      );
       dispatch({
         type: SET_APPLICATION_DATA,
         days: all[0].data,
@@ -61,27 +64,48 @@ const useApplicationData = () => {
         interviewers: all[2].data,
       });
     });
+    // try {
+    //   const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+    //   socket.onopen = () => {
+    //     socket.send("ping");
+    //     socket.onmessage = function (event) {
+    //       const data = JSON.parse(event.data);
+    //       const { type, id, interview } = data;
+    //       if (data.type === "SET_INTERVIEW") {
+    //         console.log("Web socket: SET_INTERVIEW");
+    //         dispatch({ type: type, id: id, interview: interview });
+    //       }
+    //     };
+    //   };
+
+    //   socket.onclose = () => console.log("socket closed");
+    // } catch (err) {
+    //   console.log(err);
+    // }
   }, []);
 
   const setDay = (day) => dispatch({ type: SET_DAY, day });
 
-  function updateSpots(state, id, increment) {
+  function updateSpots(state, id, interview) {
     const newDays = state.days.map((day) => {
-      const appointmentID = state.appointments[id].id;
-      // If interview is truthy and being updated, prevent spots from decreasing after saving.
-      const isInterviewActive = state.appointments[appointmentID].interview;
-      if (day.appointments.includes(appointmentID)) {
+      // If interview is truthy and being updated, prevent spots from increasing after saving.
+      const isInterviewActive = state.appointments[id].interview;
+      if (day.appointments.includes(id)) {
+        let daySpots = day.spots;
+        if (interview && !isInterviewActive) {
+          daySpots -= 1;
+        } else if (!interview) {
+          daySpots += 1;
+        }
         return {
           ...day,
-          spots: increment
-            ? isInterviewActive
-              ? day.spots
-              : day.spots - 1
-            : day.spots + 1,
+          spots: daySpots,
         };
       }
       return day;
     });
+    console.log("PrevDays Monday spots:", state.days[0].spots);
+    console.log("NewDays Monday spots:", newDays[0].spots);
     return newDays;
   }
 
@@ -90,7 +114,7 @@ const useApplicationData = () => {
       dispatch({
         type: SET_INTERVIEW,
         id,
-        interview,
+        interview: interview,
       });
     });
   };
@@ -103,23 +127,6 @@ const useApplicationData = () => {
       });
     });
   };
-
-  //Web Socket connection
-  useEffect(() => {
-    const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
-    socket.onopen = () => {
-      socket.send("ping");
-      socket.onmessage = function (event) {
-        const data = JSON.parse(event.data);
-        const { type, id, interview } = data;
-        if (data.type === "SET_INTERVIEW") {
-          dispatch({ type: type, id: id, interview: interview });
-        }
-      };
-    };
-
-    socket.onclose = () => console.log("socket closed");
-  }, []);
 
   return { state, setDay, bookInterview, cancelInterview };
 };
