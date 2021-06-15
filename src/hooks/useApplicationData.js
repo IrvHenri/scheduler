@@ -53,10 +53,6 @@ const useApplicationData = () => {
       axios.get("/api/appointments"),
       axios.get("/api/interviewers"),
     ]).then((all) => {
-      console.log(
-        "UseEffect - SET_APPLICATION_DATA : Monday spots",
-        all[0].data[0].spots
-      );
       dispatch({
         type: SET_APPLICATION_DATA,
         days: all[0].data,
@@ -104,8 +100,8 @@ const useApplicationData = () => {
       }
       return day;
     });
-    console.log("PrevDays Monday spots:", state.days[0].spots);
-    console.log("NewDays Monday spots:", newDays[0].spots);
+    // console.log("PrevDays Monday spots:", state.days[0].spots);
+    // console.log("NewDays Monday spots:", newDays[0].spots);
     return newDays;
   }
 
