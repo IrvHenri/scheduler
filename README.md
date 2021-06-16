@@ -34,7 +34,7 @@ A single page react application that allows users to book, edit and cancel inter
 ## Project Setup
 <details>
   <summary>Click to expand!</summary>
-  ## Setup
+
 
 Install dependencies with `npm install`.
 
