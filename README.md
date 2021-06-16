@@ -4,7 +4,7 @@ A single page react application that allows users to book, edit and cancel inter
 
 ## Functional Features
 
-- Data is persisted by the API server using a PostgreSQL database.
+- Data is persisted by an API server using a PostgreSQL database.
 - The client application communicates with an API server over HTTP, using the JSON format.
 - Jest tests are used throughout the development of the project.
 
