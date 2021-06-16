@@ -4,7 +4,7 @@ describe("Appointment", () => {
     cy.visit("/");
     cy.contains("Monday");
   });
-  xit("should book an interview", () => {
+  it("should book an interview", () => {
     cy.get("[alt=Add]").first().click();
     cy.get("[data-testid=student-name-input]").type("Lydia Miller-Jones");
     cy.get("[alt='Sylvia Palmer']").click();
@@ -12,7 +12,7 @@ describe("Appointment", () => {
     cy.contains(".appointment__card--show", "Lydia Miller-Jones");
     cy.contains(".appointment__card--show", "Sylvia Palmer");
   });
-  xit("should edit an interview", () => {
+  it("should edit an interview", () => {
     cy.get(":nth-child(1) > .appointment__card");
     cy.get("[alt='Edit']").invoke("show").click();
     cy.get("[data-testid=student-name-input]").clear().type("Irving Henriquez");

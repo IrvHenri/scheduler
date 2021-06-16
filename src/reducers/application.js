@@ -24,7 +24,7 @@ export default function reducer(state, action) {
         ...state.appointments,
         [id]: appointment,
       };
-      let newDays = updateSpots(state, id, interview); // !!interview
+      let newDays = updateSpots(state, id, interview);
       return {
         ...state,
         appointments: appointments,
@@ -40,7 +40,7 @@ export default function reducer(state, action) {
 
 function updateSpots(state, id, interview) {
   const newDays = state.days.map((day) => {
-    // If interview is truthy and being updated, prevent spots from increasing after saving.
+    // If interview is already truthy, prevents spots from decreasing
     const isInterviewActive = state.appointments[id].interview;
     if (day.appointments.includes(id)) {
       let daySpots = day.spots;

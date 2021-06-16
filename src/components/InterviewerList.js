@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import "components/InterviewerList.scss";
 import InterviewerListItem from "./InterviewerListItem";
 
-// onChange state not created yet in parent component
 export default function InterviewerList({ interviewers, value, onChange }) {
   let renderInterviewers = interviewers.map((interviewerItem) => (
     <InterviewerListItem
