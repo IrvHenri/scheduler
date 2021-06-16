@@ -34,6 +34,32 @@ https://distracted-pare-332419.netlify.app/
 - Cypress
 - Testing Library
 
+## Dependencies
+
+- axios: "^0.21.1",
+- classnames: "^2.2.6",
+- normalize.css: "^8.0.1",
+- react: "^16.14.0",
+- react-dom: "^16.9.0",
+- react-scripts: "3.0.0"
+
+## Dev-Dependencies
+
+- @babel/core: "^7.4.3",
+- @storybook/addon-actions: "^5.0.10",
+- @storybook/addon-backgrounds: "^5.0.10",
+- @storybook/addon-links: "^5.0.10",
+- @storybook/addons: "^5.0.10",
+- @storybook/react: "^5.0.10",
+- @testing-library/jestdom": "^4.0.0",
+- @testing-library/react: "^8.0.7",
+- @testing-library/react-hooks: "^7.0.0",
+- babel-loader: "^8.0.5",
+- node-sass: "^4.14.0",
+- prop-types: "^15.7.2",
+- react-test-renderer: "^16.14.0"
+
+
 ## Project Setup
 <details>
   <summary>Click to expand!</summary>
