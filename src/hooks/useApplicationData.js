@@ -27,26 +27,6 @@ const useApplicationData = () => {
         interviewers: all[2].data,
       });
     });
-
-    // *STRETCH : Web Socket feature - fix bug
-    // try {
-    //   const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
-    //   socket.onopen = () => {
-    //     socket.send("ping");
-    //     socket.onmessage = function (event) {
-    //       const data = JSON.parse(event.data);
-    //       const { type, id, interview } = data;
-    //       if (data.type === "SET_INTERVIEW") {
-    //         console.log("Web socket: SET_INTERVIEW");
-    //         dispatch({ type: type, id: id, interview: interview });
-    //       }
-    //     };
-    //   };
-
-    //   socket.onclose = () => console.log("socket closed");
-    // } catch (err) {
-    //   console.log(err);
-    // }
   }, []);
 
   const setDay = (day) => dispatch({ type: SET_DAY, day });
