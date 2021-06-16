@@ -8,7 +8,7 @@ A single page react application that allows users to book, edit and cancel inter
 - The client application communicates with an API server over HTTP, using the JSON format.
 - Jest tests are used throughout the development of the project.
 
-#### Live Demo: 
+### Live Demo: 
 https://distracted-pare-332419.netlify.app/
 
 ### Preview 
