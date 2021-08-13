@@ -9,7 +9,7 @@ A single page react application that allows users to book, edit and cancel inter
 - Jest tests are used throughout the development of the project.
 
 ### Live Demo: 
-https://distracted-pare-332419.netlify.app/
+[Interview Scheduler](https://distracted-pare-332419.netlify.app/)
 
 ### Preview 
 
