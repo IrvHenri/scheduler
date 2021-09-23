@@ -8,6 +8,9 @@ A single page react application that allows users to book, edit and cancel inter
 - The client application communicates with an API server over HTTP, using the JSON format.
 - Jest tests are used throughout the development of the project.
 
+### Live Demo: 
+[Interview Scheduler](https://distracted-pare-332419.netlify.app/)
+
 ### Preview 
 
 #### Appointment Form
@@ -30,6 +33,32 @@ A single page react application that allows users to book, edit and cancel inter
 - Jest
 - Cypress
 - Testing Library
+
+## Dependencies
+
+- axios: "^0.21.1",
+- classnames: "^2.2.6",
+- normalize.css: "^8.0.1",
+- react: "^16.14.0",
+- react-dom: "^16.9.0",
+- react-scripts: "3.0.0"
+
+## Dev-Dependencies
+
+- @babel/core: "^7.4.3",
+- @storybook/addon-actions: "^5.0.10",
+- @storybook/addon-backgrounds: "^5.0.10",
+- @storybook/addon-links: "^5.0.10",
+- @storybook/addons: "^5.0.10",
+- @storybook/react: "^5.0.10",
+- @testing-library/jestdom": "^4.0.0",
+- @testing-library/react: "^8.0.7",
+- @testing-library/react-hooks: "^7.0.0",
+- babel-loader: "^8.0.5",
+- node-sass: "^4.14.0",
+- prop-types: "^15.7.2",
+- react-test-renderer: "^16.14.0"
+
 
 ## Project Setup
 <details>
