@@ -2,6 +2,7 @@ import React from "react";
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment/index";
+import CircularProgress from "@mui/material/CircularProgress";
 import {
   getAppointmentsForDay,
   getInterview,
@@ -47,7 +48,11 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {[...schedule, <Appointment key="last" time="5pm" />]}
+        {schedule.length ? (
+          [...schedule, <Appointment key="last" time="5pm" />]
+        ) : (
+          <CircularProgress />
+        )}
       </section>
     </main>
   );
